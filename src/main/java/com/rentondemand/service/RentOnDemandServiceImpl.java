@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rentondemand.beans.BookingRequest;
 import com.rentondemand.beans.ItemBean;
 import com.rentondemand.beans.LoginBean;
 import com.rentondemand.beans.SearchBean;
@@ -36,6 +37,7 @@ public class RentOnDemandServiceImpl implements RentOnDemandService{
 	public RentOnDemandResponse addItem(ItemBean bean, String sso) throws RentOnDemandException {
 		UserBean userBean=dao.getUserBySSO(sso);
 		bean.setBean(userBean);
+		bean.setOwner(userBean.getName());
 		return dao.addItem(bean, sso);
 	}
 
@@ -48,6 +50,12 @@ public class RentOnDemandServiceImpl implements RentOnDemandService{
 	public RentOnDemandResponse search(SearchBean searchBean, String sso) throws RentOnDemandException {
 		return dao.search(searchBean, sso);
 		
+	}
+
+	@Override
+	public RentOnDemandResponse bookItem(BookingRequest req, String sso) throws RentOnDemandException {
+		
+		return dao.bookItem(req, sso);
 	}
 
 }

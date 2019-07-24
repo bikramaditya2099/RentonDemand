@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rentondemand.beans.BookingRequest;
 import com.rentondemand.beans.ItemBean;
 import com.rentondemand.beans.LoginBean;
 import com.rentondemand.beans.SearchBean;
@@ -74,6 +75,18 @@ public class RentOnDemandController {
 		RentOnDemandResponse response;
 		try {
 			response = demandService.search(bean, sso);
+			return new ResponseEntity<RentOnDemandResponse>(response,HttpStatus.OK);
+		} catch (RentOnDemandException e) {
+			return new ResponseEntity<RentOnDemandResponse>(new RentOnDemandResponse(e),HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
+	@PostMapping(value="/book",headers="Accept=application/json")
+	public ResponseEntity<RentOnDemandResponse> bookItem(@RequestBody BookingRequest bean,@RequestHeader("sso") String sso){
+		RentOnDemandResponse response;
+		try {
+			response = demandService.bookItem(bean, sso);
 			return new ResponseEntity<RentOnDemandResponse>(response,HttpStatus.OK);
 		} catch (RentOnDemandException e) {
 			return new ResponseEntity<RentOnDemandResponse>(new RentOnDemandResponse(e),HttpStatus.NOT_FOUND);

@@ -16,7 +16,7 @@ import org.hibernate.FetchMode;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "user_table")
+@Table(name = "USER")
 @Component
 public class UserBean {
 	@Id

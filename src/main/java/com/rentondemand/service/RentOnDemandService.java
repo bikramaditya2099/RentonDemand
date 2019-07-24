@@ -1,5 +1,6 @@
 package com.rentondemand.service;
 
+import com.rentondemand.beans.BookingRequest;
 import com.rentondemand.beans.ItemBean;
 import com.rentondemand.beans.LoginBean;
 import com.rentondemand.beans.SearchBean;
@@ -14,4 +15,5 @@ public interface RentOnDemandService {
 	public RentOnDemandResponse addItem(ItemBean bean,String sso) throws RentOnDemandException;
 	public RentOnDemandResponse getAllItems(String sso) throws RentOnDemandException;
 	public RentOnDemandResponse search(SearchBean searchBean,String sso) throws RentOnDemandException;
+	public RentOnDemandResponse bookItem(BookingRequest req,String sso)throws RentOnDemandException;
 }

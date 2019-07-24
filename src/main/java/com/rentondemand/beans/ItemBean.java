@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name = "item_table")
+@Table(name = "ITEMS")
 @Component
 public class ItemBean {
 	@Id
@@ -27,8 +28,10 @@ public class ItemBean {
 	private double rate;
 	private String owner;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name = "item_id",referencedColumnName="id")
 	private List<ItemImage> images;
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id",referencedColumnName="id")
 	@JsonIgnore
 	private UserBean bean;
 	public int getId() {

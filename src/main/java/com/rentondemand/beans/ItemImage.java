@@ -8,12 +8,15 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "item_image_table")
+@Table(name = "ITEM_IMAGE")
 @Component
 public class ItemImage {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonIgnore
 	private int id;
 	public int getId() {
 		return id;
